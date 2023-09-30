@@ -1,0 +1,179 @@
+@use '~@/assets/scss/helpers/component' as *;
+
+@mixin fadedScenarioBg() {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: currentColor;
+    opacity: 0.05;
+  }
+
+  .ChartPanel &::before {
+    background-color: transparent;
+    border: 1px solid currentColor;
+    border-width: 0 1px;
+    opacity: 0.75;
+  }
+}
+
+.ChartMetrics {
+  --cell-padding: 0.5rem;
+
+  display: flex;
+  margin-top: 1.25rem;
+  line-height: rem(20px);
+
+  .ChartTooltip-dark & {
+    display: none;
+  }
+
+  .ChartPanel & {
+    --cell-padding: 1.5rem;
+
+    margin: 3.5rem 1.75rem 2.5rem;
+    line-height: rem(24px);
+  }
+}
+
+.ChartMetrics_Table {
+  $column-gap: 0.5rem;
+
+  flex: 1;
+  margin: 0 #{-$column-gap};
+  border-collapse: separate;
+  border-spacing: $column-gap 0;
+
+  .ChartPanel & {
+    $column-gap: rem(40px);
+
+    margin: 0 #{-$column-gap};
+    padding: 0 0.5rem;
+    border-spacing: $column-gap 0;
+  }
+}
+
+.ChartMetrics_Scenario {
+  @include fadedScenarioBg;
+
+  position: relative;
+  padding: var(--cell-padding) var(--cell-padding) 0.5rem;
+
+  &::before {
+    border-radius: $border-radius-sm $border-radius-sm 0 0;
+  }
+
+  .ChartPanel & {
+    padding-bottom: 1.25rem;
+
+    &::before {
+      border-top-width: 1px;
+    }
+  }
+
+  .LetterIcon,
+  .VarianceIcon {
+    margin-left: auto;
+
+    .ChartPanel & {
+      width: rem(32px);
+      height: rem(32px);
+      margin-bottom: 0.75rem;
+      font-size: rem(18px);
+    }
+  }
+}
+
+.ChartMetrics_Scenario-variance {
+  .ChartPanel &::before {
+    border-color: $light-grey-table;
+    opacity: 1;
+  }
+}
+
+.ChartMetrics_ScenarioTotal {
+  display: none;
+
+  .ChartPanel & {
+    display: block;
+    text-align: right;
+    font-size: rem(24px);
+  }
+}
+
+.ChartPanel .VarianceIcon {
+  padding: rem(7px) rem(8px) rem(8px);
+}
+
+.ChartMetrics_Cell {
+  .ChartMetrics_Row:last-child & {
+    padding-bottom: 1rem;
+  }
+
+  .ChartMetrics_Row-main & {
+    font-weight: 600;
+  }
+}
+
+.ChartMetrics_Cell-label {
+  padding-right: 1rem;
+  font-weight: normal;
+
+  .ChartPanel & {
+    display: none;
+  }
+}
+
+.ChartMetrics_Cell-value {
+  @include fadedScenarioBg;
+
+  position: relative;
+
+  .ChartMetrics_Row:last-child &::before {
+    border-bottom-width: 1px;
+    border-radius: 0 0 $border-radius-sm $border-radius-sm;
+  }
+}
+
+.ChartMetrics_Cell-variance {
+  .ChartPanel &::before {
+    border-color: $light-grey-table;
+    opacity: 1;
+  }
+}
+
+.ChartMetrics_CellContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--cell-padding) 0 calc(1rem + var(--cell-padding));
+
+  .ChartMetrics_Cell-variance & {
+    padding-left: var(--cell-padding);
+  }
+}
+
+.ChartMetrics_Bullet {
+  width: rem(6px);
+  height: rem(6px);
+  margin-left: -1rem;
+  margin-right: 1rem;
+  background-color: currentColor;
+  border-radius: 100%;
+}
+
+.ChartMetrics_ValueLabel {
+  display: none;
+
+  .ChartPanel & {
+    display: block;
+    color: $raisin-black;
+  }
+}
+
+.ChartMetrics_Value {
+  margin-left: auto;
+}

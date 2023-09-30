@@ -1,0 +1,98 @@
+@use '~@/assets/scss/helpers/component' as *;
+
+.ChartLegend {
+  display: flex;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  margin: 0;
+  margin-right: auto;
+  padding: 0;
+  list-style-type: none;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+
+  .PartToWholeChart & {
+    min-width: 0;
+    max-width: 100%;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+
+  .PartToWholeChart_Scenario + & {
+    align-self: start;
+  }
+
+  .PartToWholeChart-portrait & {
+    grid-column: 1;
+    flex: 1;
+  }
+}
+
+.ChartLegend-glance {
+  justify-content: center;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  font-size: rem(10px);
+  letter-spacing: normal;
+}
+
+.ChartLegend_Item {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+  overflow: hidden;
+  white-space: nowrap;
+
+  .PartToWholeChart & {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .ChartLegend-glance & {
+    flex: 0 1 auto;
+  }
+}
+
+.ChartLegend_ItemBullet {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  margin-right: 2px;
+  border-radius: 50%;
+
+  .ChartLegend-glance & {
+    width: 6px;
+    height: 6px;
+  }
+}
+
+.ChartLegend_ItemLabel {
+  margin-left: 0.5rem;
+  overflow: hidden;
+  line-height: 1.9;
+  direction: rtl;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-black);
+
+  .DashboardLanding-editing & {
+    pointer-events: none;
+  }
+}
+
+.ChartLegend_ItemValue {
+  font-weight: 600;
+}
+
+.ChartLegend_ShowMoreLink {
+  flex: 1;
+  white-space: nowrap;
+
+  &::after {
+    @include link-arrow;
+
+    content: '';
+    vertical-align: baseline;
+  }
+}
